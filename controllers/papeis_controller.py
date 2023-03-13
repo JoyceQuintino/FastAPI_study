@@ -8,10 +8,10 @@ router = APIRouter()
 database = []
 
 @router.post('/')
-def add_item(item: Papel):
-    database.append(item)
-    return item
+async def add_item(papel: Papel):
+    await papel.save()
+    return papel
 
 @router.get('/')
-def get_item():
-    return database
+async def get_item():
+    return await Papel.objects.all()
